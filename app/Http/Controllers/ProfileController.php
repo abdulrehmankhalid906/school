@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\User;
 use App\Models\Student;
 use App\Models\Subject;
 use Illuminate\View\View;
@@ -30,47 +31,78 @@ class ProfileController extends Controller
         ]);
     }
 
-    public function edit(Request $request): View
+    public function Userprofile(Request $request)
     {
-        return view('profile.edit', [
-            'user' => $request->user(),
+        $loggedinUser = Auth::user();
+        $user = User::where('id', $loggedinUser->id)->first();
+        // dd($user);
+        return view('modules.profile_user',[
+            'user' => $user,
         ]);
     }
 
-    /**
-     * Update the user's profile information.
-     */
-    public function update(ProfileUpdateRequest $request): RedirectResponse
-    {
-        $request->user()->fill($request->validated());
 
-        if ($request->user()->isDirty('email')) {
-            $request->user()->email_verified_at = null;
+    public function updateProfile(Request $request)
+    {
+        $user_id = $request->user_id;
+        $user = User::where('id', $user_id)->first();
+
+        if ($user)
+        {
+            $user->name = $request->input('name', $user->name);
+            $user->email = $request->input('email', $user->email);
+
+            // Update password if provided
+            $oldPassword = $request->input('old-password');
+            $newPassword = $request->input('new-password');
+
+            if ($oldPassword && $newPassword)
+            {
+                if (password_verify($oldPassword, $user->password))
+                {
+                    $user->password = bcrypt($newPassword);
+                }
+                else
+                {
+                    return redirect()->back()->with('error', 'Old password does not match');
+                }
+            }
+            if ($request->hasFile('user_image')) {
+                $file = $request->file('user_image');
+                $filename = time() . '-' . $file->getClientOriginalName();
+                $file->storeAs('public/images/', $filename);
+                $user->user_image = $filename;
+            }
+            $user->save();
+
+            return redirect()->back()->with('success', 'Profile is updated');
         }
 
-        $request->user()->save();
-
-        return Redirect::route('profile.edit')->with('status', 'profile-updated');
+        return redirect()->back()->with('error', 'Unable to update profile');
     }
 
-    /**
-     * Delete the user's account.
-     */
-    public function destroy(Request $request): RedirectResponse
+
+    public function deleteProfile(Request $request)
     {
-        $request->validateWithBag('userDeletion', [
-            'password' => ['required', 'current_password'],
+
+        $request->validate([
+            'delete_profile' => 'required',
+        ],
+        [
+            'delete_profile.required' => 'Please confirm that you want to delete your profile.',
         ]);
 
-        $user = $request->user();
+        $authDeletecheck = $request->input('delete_profile') === 'on' ? '1' : '0';
 
-        Auth::logout();
+        $loggedinUser = Auth::user();
 
-        $user->delete();
+        $user = User::where('id', $loggedinUser->id)->first();
 
-        $request->session()->invalidate();
-        $request->session()->regenerateToken();
+        if($user && $authDeletecheck !=='0')
+        {
+            $user->delete();
 
-        return Redirect::to('/');
+            return redirect()->route('login')->with('success', 'Your profile has been deleted');
+        }
     }
 }

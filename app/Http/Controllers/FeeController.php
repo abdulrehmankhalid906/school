@@ -11,6 +11,8 @@ class FeeController extends Controller
     public function index()
     {
         $invoices = Invoice::with('student')->get();
+
+        // dd($invoices);
         return view('fee.fee',[
             'invoices' => $invoices
         ]);

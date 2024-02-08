@@ -7,7 +7,7 @@
                 <div class="card-body">
                     <h5 class="card-title">Students</h5>
 
-                    <table class="table table-borderless datatable">
+                    <table class="table datatable">
                         <thead>
                             <tr>
                                 <th scope="col">#</th>
@@ -23,7 +23,7 @@
                                 <tr>
                                     <th>{{ $student->id }}</th>
                                     <td>{{ $student->name}}</td>
-                                    <td>{{ $student->subject_id }}<span class="badge rounded-pill bg-dark text-light">Light</span></td>
+                                    <td>{{ $student->subject_id }}
                                     <td>
                                         @if( $student->status == 0)
                                             <span class="badge rounded-pill bg-danger">Unverified</span>
@@ -46,9 +46,6 @@
                         </tbody>
                     </table>
                 </div>
-            </div>
-            <div class="d-flex">
-                {!! $students->links() !!}
             </div>
         </div>
     </div>

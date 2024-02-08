@@ -17,7 +17,7 @@
                         </div>
                     </div>
 
-                    <table class="table table-borderless datatable">
+                    <table class="table datatable">
                         <thead>
                             <tr>
                                 <th scope="col">ID</th>
@@ -27,18 +27,15 @@
                         </thead>
                         <tbody>
                             @foreach($subjects as $subject)
-                            <tr>
-                                <td scope="col">{{ $subject->id }}</td>
-                                <td scope="col">{{ $subject->name }}</td>
-                                <td scope="col">{{ $subject->created_at }}</td>
-                            </tr>
-                        @endforeach
+                                <tr>
+                                    <td scope="col">{{ $subject->id }}</td>
+                                    <td scope="col">{{ $subject->name }}</td>
+                                    <td scope="col">{{ $subject->created_at }}</td>
+                                </tr>
+                            @endforeach
                         </tbody>
                     </table>
                 </div>
-            </div>
-            <div class="d-flex">
-                {!! $subjects->links() !!}
             </div>
         </div>
     </div>

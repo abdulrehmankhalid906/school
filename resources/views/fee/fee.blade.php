@@ -18,7 +18,7 @@
                             </div>
                         </div>
 
-                        <div class="row">
+                        {{-- <div class="row">
                             <div class="col-sm-4 justify-content-end">
                                 <select class="form-select" aria-label="Default select example" id="filter_month">
                                     <option selected>Filter Months</option>
@@ -36,10 +36,10 @@
                                     <option value="December">December</option>
                                 </select>
                             </div>
-                        </div>
+                        </div> --}}
                     </div>
 
-                    <table class="table table-borderless datatable" id="monthly_search">
+                    <table class="table datatable" id="monthly_search">
                         <thead>
                             <tr>
                                 <th scope="col">ID</th>
@@ -48,33 +48,17 @@
                             </tr>
                         </thead>
                         <tbody>
-                            @foreach($invoices as $invoice)
-                            <tr>
-                                <td>{{ $invoice->id }}</td>
-                                <td>{{ $invoice->student->name }}</td>
-                                <td>
-                                    @if($invoice->payment_status == "on")
-                                        <span class="badge rounded-pill bg-success">Paid</span>
-                                    @else
-                                        <span class="badge rounded-pill bg-danger">Unpaid</span>
-                                    @endif
-                                </td>
-                            </tr>
-                        @endforeach
                         </tbody>
                     </table>
                 </div>
             </div>
-            {{-- <div class="d-flex">
-                {!! $subjects->links() !!}
-            </div> --}}
         </div>
     </div>
 </section>
 @endsection
 
 <script src="https://code.jquery.com/jquery-3.7.1.js"></script>
-<script>
+{{-- <script>
     $(document).ready(function(){
         $('#filter_month').change(function(){
             var filter_data = $('#filter_month').val();
@@ -91,7 +75,7 @@
 
                 success:function(data)
                 {
-                    // console.log(data);
+                    console.log(data);
                     $('#monthly_search').empty();
 
                     if (data.length > 0)
@@ -103,13 +87,7 @@
                                 <tr>
                                     <td>${getData.id}</td>
                                     <td>${getData.student.name }</td>
-                                    <td>
-                                        @if($invoice->payment_status == "on")
-                                            <span class="badge rounded-pill bg-success">Paid</span>
-                                        @else
-                                            <span class="badge rounded-pill bg-danger">Unpaid</span>
-                                        @endif
-                                    </td>
+                                    <td>${getData.student.payment_status === 'on' ? 'Paid' : 'UnPaid'}</td>
                                 </tr>
                             `;
                             $('#monthly_search').append(html);
@@ -128,4 +106,4 @@
             });
         });
     });
-</script>
+</script> --}}

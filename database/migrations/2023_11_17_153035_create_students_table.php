@@ -18,6 +18,7 @@ return new class extends Migration
             $table->string('class')->nullable();
             $table->json('subject_id')->nullable();
             $table->integer('fee')->nullable();
+            $table->integer('status')->nullable();
             $table->timestamps();
             $table->softDeletes();
         });

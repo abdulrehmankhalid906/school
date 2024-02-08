@@ -42,5 +42,10 @@ Route::get('/fetch-feeable', [FeeController::class,'getUser_fee'])->name('get-us
 Route::get('/fetch-monthsData', [FeeController::class,'monthly_data'])->name('fetch-monthly-data');
 
 
+//user-profile
+Route::get('/user-profile', [ProfileController::class, 'Userprofile'])->name('user-profile');
+Route::post('/user-profile', [ProfileController::class, 'updateProfile'])->name('update-profile');
+
+Route::delete('/delete-profile', [ProfileController::class, 'deleteProfile'])->name('delete-profile');
 
 require __DIR__.'/auth.php';

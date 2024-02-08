@@ -12,7 +12,7 @@ class SubjectController extends Controller
      */
     public function index()
     {
-        $subjects = Subject::paginate(6);
+        $subjects = Subject::all();
         return view('subject.subjects',[
             'subjects' => $subjects,
         ]);
