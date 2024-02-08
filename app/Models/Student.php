@@ -28,9 +28,7 @@ class Student extends Model
 
     public function invoice()
     {
-        return $this->hasMany(Invoice::class, 'id');
+        return $this->hasMany(Invoice::class);
     }
-
-
 
 }

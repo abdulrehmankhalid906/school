@@ -48,6 +48,19 @@
                             </tr>
                         </thead>
                         <tbody>
+                            @foreach ($invoices as $invoice)
+                                <tr>
+                                    <td>{{ $invoice->id }}</td>
+                                    <td>{{ $invoice->student->name }}</td>
+                                    <td>
+                                        @if ($invoice->payment_status == 'off')
+                                            <span class="badge bg-success">Unpaid</span>
+                                        @else
+                                            <span class="badge bg-danger">Paid</span>
+                                        @endif
+                                    </td>
+                                </tr>
+                            @endforeach
                         </tbody>
                     </table>
                 </div>

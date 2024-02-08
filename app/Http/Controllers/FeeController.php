@@ -11,7 +11,6 @@ class FeeController extends Controller
     public function index()
     {
         $invoices = Invoice::with('student')->get();
-
         // dd($invoices);
         return view('fee.fee',[
             'invoices' => $invoices
@@ -44,6 +43,13 @@ class FeeController extends Controller
         return redirect()->route('get-fee')->with('success','The fee has been submitted');
     }
 
+    public function generateInvoice()
+    {
+        $students = Student::all();
+        return view('fee.generate_invoice',[
+            'students' => $students
+        ]);
+    }
 
     //Working as API's
     public function getUser_fee(Request $request)
@@ -56,11 +62,11 @@ class FeeController extends Controller
     }
 
 
-    public function monthly_data(Request $request)
+    public function generateUserInvoice(Request $request)
     {
-        $monthlyRequest = $request->input('search_month');
+        $user_fee_data = $request->input('search_student_data');
 
-        $getDBdata = Invoice::with('student')->where('payment_month', $monthlyRequest)->get();
+        $getDBdata = Invoice::with('student')->where('student_id', $user_fee_data)->get();
 
         return response()->json($getDBdata);
     }

@@ -36,10 +36,13 @@ Route::resource('/subjects', SubjectController::class);
 
 
 Route::get('/fees', [FeeController::class,'index'])->name('get-fee');
+Route::get('/generate-invoice', [FeeController::class,'generateInvoice'])->name('generate-invoice');
 Route::get('/create-fee', [FeeController::class,'create'])->name('create-fee');
 Route::post('/create-fee-terrif', [FeeController::class,'store'])->name('generate-fee-tarrif');
 Route::get('/fetch-feeable', [FeeController::class,'getUser_fee'])->name('get-user-fee');
-Route::get('/fetch-monthsData', [FeeController::class,'monthly_data'])->name('fetch-monthly-data');
+
+//api
+Route::get('/generate-user-invoice', [FeeController::class,'generateUserInvoice'])->name('generate-user-invoice');
 
 
 //user-profile

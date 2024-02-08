@@ -37,6 +37,12 @@
                         <i class="bi bi-circle"></i><span>Student Fee</span>
                     </a>
                 </li>
+
+                <li>
+                    <a href="{{ route('generate-invoice') }}">
+                        <i class="bi bi-circle"></i><span>Generate Invoice</span>
+                    </a>
+                </li>
             </ul>
         </li>
 
