@@ -11,6 +11,7 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Support\Facades\Redirect;
 use App\Http\Requests\ProfileUpdateRequest;
+use Spatie\Activitylog\Models\Activity;
 
 class ProfileController extends Controller
 {
@@ -23,11 +24,13 @@ class ProfileController extends Controller
         $subject = Subject::count();
         $student_verified = Student::where('status', 1)->count();
         $student_unverified = Student::where('status', 0)->count();
+        $activity_log = Activity::all();
         return view('modules.main_dashboard',[
             'student' => $student,
             'subject' => $subject,
             'student_verified' => $student_verified,
             'student_unverified' => $student_unverified,
+            'activity_log' => $activity_log
         ]);
     }
 
