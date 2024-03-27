@@ -1,7 +1,9 @@
 <?php
 
 use App\Http\Controllers\FeeController;
+use App\Http\Controllers\PermissionController;
 use App\Http\Controllers\ProfileController;
+use App\Http\Controllers\RoleController;
 use App\Http\Controllers\StudentController;
 use App\Http\Controllers\SubjectController;
 use Illuminate\Support\Facades\Route;
@@ -34,6 +36,12 @@ Route::middleware('auth')->group(function () {
 Route::resource('/students', StudentController::class);
 Route::resource('/subjects', SubjectController::class);
 
+Route::get('/assign-permissions/{id}', [RoleController::class,'AssignPermissionsToRole'])->name('assign-permissions');
+Route::put('/assign-permissions/{id}', [RoleController::class,'StoreAssignPermissions'])->name('store-assign-permissions');
+
+
+Route::resource('/roles', RoleController::class);
+Route::resource('/permissions', PermissionController::class);
 
 Route::get('/fees', [FeeController::class,'index'])->name('get-fee');
 Route::get('/generate-invoice', [FeeController::class,'generateInvoice'])->name('generate-invoice');

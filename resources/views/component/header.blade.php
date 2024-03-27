@@ -12,7 +12,11 @@
         <ul class="d-flex align-items-center">
             <li class="nav-item dropdown pe-3">
                 <a class="nav-link nav-profile d-flex align-items-center pe-0" href="#" data-bs-toggle="dropdown">
-                    <img src="{{ asset('storage/images/' . Auth::user()->user_image) }}" alt="Profile" class="rounded-circle">
+                    @if(Auth::user()->user_image)
+                        <img src="{{ asset('storage/images/' . Auth::user()->user_image) }}" alt="Profile" class="rounded-circle">
+                    @else
+                        <img src="https://ui-avatars.com/api/?name={{ urlencode(Auth::user()->name) }}" alt="Profile" class="rounded-circle">
+                    @endif
                     <span class="d-none d-md-block dropdown-toggle ps-2">{{ Auth::user()->name }}</span>
                 </a>
 
