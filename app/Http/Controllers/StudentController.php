@@ -13,7 +13,7 @@ class StudentController extends Controller
      */
     public function index()
     {
-        $students = Student::with('subject')->get();
+        $students = Student::with('subjects')->get();
         return view('modules.students',[
             'students' => $students,
         ]);
@@ -35,6 +35,7 @@ class StudentController extends Controller
      */
     public function store(Request $request)
     {
+        // dd($request->all());
         // $request->validate([
         //     'name' => 'required|string|max:25',
         //     'phone' => 'required|integer',
@@ -47,10 +48,16 @@ class StudentController extends Controller
             'name' => $request->name,
             'phone' => $request->phone,
             'class' => $request->class,
-            'subject_id' => json_encode($request->subject_id), //array
+            // 'subject_id' => json_encode($request->subject_id), //array
             'fee' => $request->fee,
             'status' => $request->has('status') ? 1 : 0,
         ]);
+
+
+        if ($request->has('subject_id'))
+        {
+            $data->subjects()->attach($request->input('subject_id'));
+        }
 
         // dd($data);
 

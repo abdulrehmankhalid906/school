@@ -44,8 +44,15 @@ class RegisteredUserController extends Controller
 
         event(new Registered($user));
 
-        Auth::login($user);
+        // if(!$user->is_active == 1)
+        // {
+        //     return redirect()->route('login')->with('success', "Account Created ! Wait for verification");
+        // }
 
-        return redirect(RouteServiceProvider::HOME);
+        return redirect()->route('login')->with('success', "Your account created!");
+
+        // Auth::login($user);
+
+        // return redirect(RouteServiceProvider::HOME);
     }
 }

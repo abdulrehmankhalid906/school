@@ -24,7 +24,8 @@ class ProfileController extends Controller
         $subject = Subject::count();
         $student_verified = Student::where('status', 1)->count();
         $student_unverified = Student::where('status', 0)->count();
-        $activity_log = Activity::all();
+        $activity_log = Activity::latest()->take(7)->get();
+
         return view('modules.main_dashboard',[
             'student' => $student,
             'subject' => $subject,

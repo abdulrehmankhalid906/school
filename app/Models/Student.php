@@ -21,9 +21,9 @@ class Student extends Model
         // 'fee_status'
     ];
 
-    public function subject()
+    public function subjects()
     {
-        return $this->belongsTo(Subject::class, 'subject_id', 'id');
+        return $this->belongsToMany(Subject::class, 'students_subjects', 'student_id', 'subject_id');
     }
 
     public function invoice()

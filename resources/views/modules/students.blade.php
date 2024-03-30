@@ -23,7 +23,14 @@
                                 <tr>
                                     <th>{{ $student->id }}</th>
                                     <td>{{ $student->name}}</td>
-                                    <td>{{ $student->subject_id }}
+                                    <td>
+                                        @foreach ($student->subjects as $subject)
+                                            {{ $subject->name }}
+                                            @if (!$loop->last)
+                                                ,
+                                            @endif
+                                        @endforeach
+                                    </td>
                                     <td>
                                         @if( $student->status == 0)
                                             <span class="badge rounded-pill bg-danger">Unverified</span>
