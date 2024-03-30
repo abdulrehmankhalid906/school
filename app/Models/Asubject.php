@@ -5,9 +5,9 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class Inquiry extends Model
+class Asubject extends Model
 {
     use HasFactory;
 
-    protected $fillable = ['title','user_id'];
+    protected $fillable = ['inquiry_id', 'subject_id'];
 }

@@ -11,14 +11,14 @@
                             <div class="row mb-3">
                                 <label for="inputText" class="col-sm-2 col-form-label">Title</label>
                                 <div class="col-sm-10">
-                                    <input type="text" class="form-control" name="title" id="title" value="SomeThing Text">
+                                    <input type="text" class="form-control" name="title" id="title" required>
                                 </div>
                             </div>
 
                             <div class="row mb-3">
                                 <label class="col-sm-2 col-form-label">Users</label>
                                 <div class="col-sm-10">
-                                    <select class="form-select" aria-label="select example" name="user_id" id="user_id">
+                                    <select class="form-select" aria-label="select example" name="user_id" id="user_id" required>
                                         <option value="" selected>Please select one</option>
                                         @foreach ($users as $user)
                                             <option value="{{ $user->id }}">{{ $user->name }}</option>
@@ -27,7 +27,7 @@
                                 </div>
                             </div>
 
-                            <input type="text" name="selected_subjects" id="selected_subjects" value="" readonly>
+                            <input type="hidden" name="selected_subjects" id="selected_subjects" value="" readonly>
 
                             <div class="row mb-3">
                                 <div class="col-sm-10">
