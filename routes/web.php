@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\FeeController;
+use App\Http\Controllers\InquiryController;
 use App\Http\Controllers\PermissionController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\RoleController;
@@ -34,15 +35,6 @@ Route::middleware('auth')->group(function () {
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
 });
 
-Route::resource('/students', StudentController::class);
-Route::resource('/subjects', SubjectController::class);
-
-Route::get('/assign-permissions/{id}', [RoleController::class,'AssignPermissionsToRole'])->name('assign-permissions');
-Route::put('/assign-permissions/{id}', [RoleController::class,'StoreAssignPermissions'])->name('store-assign-permissions');
-
-
-Route::resource('/roles', RoleController::class);
-Route::resource('/permissions', PermissionController::class);
 
 Route::get('/fees', [FeeController::class,'index'])->name('get-fee');
 Route::get('/generate-invoice', [FeeController::class,'generateInvoice'])->name('generate-invoice');
@@ -54,10 +46,20 @@ Route::get('/fetch-feeable', [FeeController::class,'getUser_fee'])->name('get-us
 Route::get('/generate-user-invoice', [FeeController::class,'generateUserInvoice'])->name('generate-user-invoice');
 
 
-//user-profile
+//User ProfileRoutes
 Route::get('/user-profile', [ProfileController::class, 'Userprofile'])->name('user-profile');
 Route::post('/user-profile', [ProfileController::class, 'updateProfile'])->name('update-profile');
-
 Route::delete('/delete-profile', [ProfileController::class, 'deleteProfile'])->name('delete-profile');
+
+//Custom Permission Routes
+Route::get('/assign-permissions/{id}', [RoleController::class,'AssignPermissionsToRole'])->name('assign-permissions');
+Route::put('/assign-permissions/{id}', [RoleController::class,'StoreAssignPermissions'])->name('store-assign-permissions');
+
+//Resource Routes
+Route::resource('/students', StudentController::class);
+Route::resource('/subjects', SubjectController::class);
+Route::resource('/roles', RoleController::class);
+Route::resource('/permissions', PermissionController::class);
+Route::resource('/inquires', InquiryController::class);
 
 require __DIR__.'/auth.php';
