@@ -8,10 +8,11 @@
                         <h5 class="card-title">User Profile</h5>
                         <form action="{{ route('update-profile') }}" method="POST" enctype="multipart/form-data">
                             @csrf
-                            <input type="hidden" value="{{ Auth::user()->id }}" name="user_id" readonly>
+                            {{-- <input type="hidden" value="{{ Auth::user()->id }}" name="user_id" readonly> --}}
                             <div class="row mb-3">
                                 <div class="col-sm-2">
                                     <label for="inputText">Profile Image:</label>
+                                    <img src="{{ asset('storage/images/' .$user->user_image) }}" alt="{{ $user->user_image ?? 'No Image' }} {{ $user->name }}" class="img-fluid">
                                 </div>
 
                                 <div class="col-sm-10">

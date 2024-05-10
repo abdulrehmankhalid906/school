@@ -37,9 +37,8 @@ class ProfileController extends Controller
 
     public function Userprofile(Request $request)
     {
-        $loggedinUser = Auth::user();
-        $user = User::where('id', $loggedinUser->id)->first();
-        // dd($user);
+        $user = User::where('id', Auth::user()->id)->first();
+        
         return view('modules.profile_user',[
             'user' => $user,
         ]);
@@ -48,8 +47,7 @@ class ProfileController extends Controller
 
     public function updateProfile(Request $request)
     {
-        $user_id = $request->user_id;
-        $user = User::where('id', $user_id)->first();
+        $user = User::where('id', Auth::user()->id)->first();
 
         if ($user)
         {
@@ -98,9 +96,7 @@ class ProfileController extends Controller
 
         $authDeletecheck = $request->input('delete_profile') === 'on' ? '1' : '0';
 
-        $loggedinUser = Auth::user();
-
-        $user = User::where('id', $loggedinUser->id)->first();
+        $user = User::where('id', Auth::user()->id)->first();
 
         if($user && $authDeletecheck !=='0')
         {
