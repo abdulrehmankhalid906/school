@@ -21,6 +21,10 @@
                                     @endforeach
                                 </select>
                             </div>
+
+                            <div class="col-sm-2">
+                                <button class="btn btn-primary" id="generate-invoice" style="display:none;"><i class="ri-download-cloud-fill"></i></button>
+                            </div>
                         </div>
 
                         <div class="row mt-4">
@@ -54,8 +58,11 @@
 <script src="https://code.jquery.com/jquery-3.7.1.js"></script>
 <script>
     $(document).ready(function(){
+
+        // Generate Invoice
         $('#student-id').change(function(){
             var student_data = $('#student-id').val();
+            var generateInvoice = $('#generate-invoice').hide();
 
             $.ajax({
                 url: "{{ route('generate-user-invoice') }}",
@@ -66,6 +73,7 @@
                 success:function(data)
                 {
                     $('#invoice_report').empty();
+                    $('#generate-invoice').show(300);
 
                     var grandTotal = 0;
 
@@ -97,5 +105,19 @@
                 },
             });
         });
+
+
+        //PDF Generation
+        $('#generate-invoice').click(function(){
+
+            var student_data = document.getElementById('student-id').value;
+
+            $.ajax([
+                url: "{{ route('generate-invoice-pdf') }}",
+                type: "GET",
+
+            ])
+        })
+
     });
 </script>

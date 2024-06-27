@@ -38,6 +38,7 @@ Route::middleware('auth')->group(function () {
 
 Route::get('/fees', [FeeController::class,'index'])->name('get-fee');
 Route::get('/generate-invoice', [FeeController::class,'generateInvoice'])->name('generate-invoice');
+Route::get('/generate-invoice-pdf', [FeeController::class,'generatePDF'])->name('generate-invoice-pdf');
 Route::get('/create-fee', [FeeController::class,'create'])->name('create-fee');
 Route::post('/create-fee-terrif', [FeeController::class,'store'])->name('generate-fee-tarrif');
 Route::get('/fetch-feeable', [FeeController::class,'getUser_fee'])->name('get-user-fee');

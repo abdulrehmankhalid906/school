@@ -14,6 +14,21 @@
             <div class="card">
                 <div class="card-body">
                     <h5 class="card-title">Fee Terrif</h5>
+                    {{-- <div class="card">
+                        <div class="card-header">
+                            <div class="card-body">
+                                @if ($errors->any())
+                                <div class="alert alert-danger">
+                                    <ul>
+                                        @foreach ($errors->all() as $error)
+                                            <li>{{ $error }}</li>
+                                        @endforeach
+                                    </ul>
+                                </div>
+                            @endif
+                            </div>
+                        </div>
+                    </div> --}}
                     <form action="{{ route('generate-fee-tarrif') }}" method="POST">
                         @csrf
                         <div class="row">
@@ -23,19 +38,26 @@
                         <div class="row mb-3">
                             <div class="col-sm-6">
                                 <label class="form-label">Select Student</label>
-                                <select class="form-select" aria-label="Default select example" name="student_id" id="name">
-                                    <option>Select One</option>
+                                <select class="form-select @if ($errors->has('student_id')) is-invalid @endif" aria-label="Default select example" name="student_id" id="name">
+                                    <option value="">Select One</option>
                                     @if(count($students)>0)
                                         @foreach ($students as $student)
                                             <option value="{{ $student->id }}">{{ $student->name }}</option>
                                         @endforeach
                                     @endif
                                 </select>
+                                <div class="invalid-feedback">
+                                    @if ($errors->has('student_id'))
+                                    {{ $errors->first('student_id') }}
+                                    @else
+                                        Student is required!
+                                    @endif
+                                </div>
                             </div>
 
                             <div class="col-sm-6">
                                 <label class="form-label">Select Month</label>
-                                <select class="form-select" aria-label="Default select example" name="payment_month" id="payment_month">
+                                <select class="form-select " aria-label="Default select example" value="{{ old('payment_month') }}" name="payment_month" id="payment_month">
                                     <option value="January">January</option>
                                     <option value="February">February</option>
                                     <option value="March">March</option>
@@ -112,6 +134,7 @@ $(document).ready(function () {
             },
             success: function (res) {
                 $('#payable').empty();
+                $('#total_amount').empty();
 
                 if (res.length > 0) {
                     res.forEach(function (student) {

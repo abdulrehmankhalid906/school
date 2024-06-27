@@ -20,25 +20,23 @@ class ProfileController extends Controller
      */
     public function index()
     {
-        $student = Student::count();
-        $subject = Subject::count();
+    
         $student_verified = Student::where('status', 1)->count();
         $student_unverified = Student::where('status', 0)->count();
         $activity_log = Activity::latest()->take(7)->get();
 
         return view('modules.main_dashboard',[
-            'student' => $student,
-            'subject' => $subject,
+            'student' => Student::count(),
+            'subject' =>  Subject::count(),
             'student_verified' => $student_verified,
             'student_unverified' => $student_unverified,
             'activity_log' => $activity_log
         ]);
     }
 
-    public function Userprofile(Request $request)
+    public function Userprofile()
     {
         $user = User::where('id', Auth::user()->id)->first();
-        
         return view('modules.profile_user',[
             'user' => $user,
         ]);

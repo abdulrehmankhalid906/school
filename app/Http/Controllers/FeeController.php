@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Invoice;
 use App\Models\Student;
 use Illuminate\Http\Request;
+use App\Http\Requests\FeeRequest;
 
 class FeeController extends Controller
 {
@@ -28,7 +29,7 @@ class FeeController extends Controller
         ]);
     }
 
-    public function store(Request $request)
+    public function store(FeeRequest $request)
     {
         Invoice::create([
             'student_id' => $request->student_id,
@@ -69,5 +70,10 @@ class FeeController extends Controller
         $getDBdata = Invoice::with('student')->where('student_id', $user_fee_data)->get();
 
         return response()->json($getDBdata);
+    }
+
+    public function generatePDF()
+    {
+
     }
 }
