@@ -39,7 +39,6 @@
                                         <td>  </td>
                                         <td>{{ $user->created_at }}</td>
                                         <td>
-                                            <a href="{{ route('users.show', $user->id) }}" class="btn btn-primary btn-sm"><i class="bi bi-eye"></i></a>
                                             <a href="{{ route('users.edit', $user->id) }}" class="btn btn-info btn-sm"><i class="bi bi-eyedropper"></i></a>
                                             <form action="{{ route('users.destroy', $user->id) }}" method="POST" style="display: inline;">
                                                 @csrf

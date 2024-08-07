@@ -13,9 +13,8 @@ class RoleController extends Controller
      */
     public function index()
     {
-        $roles = Role::all();
         return view('roles.roles', [
-            'roles' => $roles
+            'roles' => Role::get(),
         ]);
     }
 
@@ -95,12 +94,14 @@ class RoleController extends Controller
 
     public function AssignPermissionsToRole(Request $request, $id)
     {
-        $roles = Role::find($id);
+        $role = Role::find($id);
         $permissions = Permission::all();
+        $rolePermissions = $role->permissions->pluck('name')->toArray(); 
 
         return view('roles.assign_permissions', [
-            'roles' => $roles,
-            'permissions' => $permissions
+            'role' => $role,
+            'permissions' => $permissions,
+            'rolePermissions' => $rolePermissions
         ]);
     }
 

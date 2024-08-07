@@ -8,15 +8,18 @@
                 <div class="row justify-content-center">
                     <div class="col-lg-12">
                         <div class="card shadow-lg border-0">
-                            <div class="card-header">Role : {{ $roles->name }}</div>
+                            <div class="card-header">Role : {{ $role->name }}</div>
                             <div class="card-body">
-                                <form action="{{ route('store-assign-permissions', $roles->id) }}" method="POST">
+                                <form action="{{ route('store-assign-permissions', $role->id) }}" method="POST">
                                     @csrf
                                     @method('PUT')
                                     <div class="mb-3">
                                         @foreach ($permissions as $permission)
-                                            <label for="exampleFormControlInput1" class="form-label">{{ $permission->name }}</label>
-                                            <input type="checkbox" class="form-check-input" name="permission[]" value="{{ $permission->name }}">
+                                            <div class="form-check">
+                                                <input type="checkbox" class="form-check-input" name="permission[]" value="{{ $permission->name }}" 
+                                                    {{ in_array($permission->name, $rolePermissions) ? 'checked' : '' }}>
+                                                <label for="permission" class="form-check-label">{{ $permission->name }}</label>
+                                            </div>
                                         @endforeach
                                     </div>
 
