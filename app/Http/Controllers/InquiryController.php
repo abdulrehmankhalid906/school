@@ -15,6 +15,8 @@ class InquiryController extends Controller
      */
     public function index()
     {
+        check_user_permissions('Manage Inquiry');
+
         $users = User::all();
         $subjects = Subject::all();
 

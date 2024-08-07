@@ -13,6 +13,7 @@ class RoleController extends Controller
      */
     public function index()
     {
+        check_user_permissions('Manage Roles');
         return view('roles.roles', [
             'roles' => Role::get(),
         ]);
