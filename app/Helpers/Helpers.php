@@ -7,7 +7,8 @@ function check_user_permissions($permission)
 {
     $user = Auth::user();
 
-    //dd($user);
+    //Checkigng if the user has permission true mean 'yes' false means 'no'
+    // dd($user->can($permission)); 
 
     if ($user && $user->can($permission)) {
         return true;

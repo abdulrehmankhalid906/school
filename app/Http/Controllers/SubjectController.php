@@ -12,6 +12,8 @@ class SubjectController extends Controller
      */
     public function index()
     {
+        check_user_permissions('Manage Subjects');
+
         $subjects = Subject::all();
         return view('subject.subjects',[
             'subjects' => $subjects,
@@ -23,6 +25,8 @@ class SubjectController extends Controller
      */
     public function create()
     {
+        check_user_permissions('Manage Subjects');
+
         return view('subject.subjects_add');
     }
 
@@ -44,6 +48,8 @@ class SubjectController extends Controller
      */
     public function show(string $id)
     {
+        check_user_permissions('Manage Subjects');
+
         //
     }
 
@@ -52,6 +58,8 @@ class SubjectController extends Controller
      */
     public function edit(string $id)
     {
+        check_user_permissions('Manage Subjects');
+
         //
     }
 

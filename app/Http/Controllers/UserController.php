@@ -15,6 +15,8 @@ class UserController extends Controller
      */
     public function index()
     {
+        check_user_permissions('Manage Users');
+
         return view('users.users', [
             'users' => User::all(),
         ]);
@@ -25,6 +27,8 @@ class UserController extends Controller
      */
     public function create()
     {
+        check_user_permissions('Manage Users');
+
         return view('users.add_new',[
             'roles' => Role::get(),
         ]);
@@ -49,6 +53,8 @@ class UserController extends Controller
      */
     public function show(string $id)
     {
+        check_user_permissions('Manage Users');
+
         //
     }
 
@@ -57,6 +63,8 @@ class UserController extends Controller
      */
     public function edit(string $id)
     {
+        check_user_permissions('Manage Users');
+
         //
     }
 

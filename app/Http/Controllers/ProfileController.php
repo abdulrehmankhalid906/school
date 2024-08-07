@@ -20,7 +20,6 @@ class ProfileController extends Controller
      */
     public function index()
     {
-    
         $student_verified = Student::where('status', 1)->count();
         $student_unverified = Student::where('status', 0)->count();
         $activity_log = Activity::latest()->take(7)->get();

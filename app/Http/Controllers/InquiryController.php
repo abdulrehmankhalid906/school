@@ -32,6 +32,8 @@ class InquiryController extends Controller
      */
     public function create()
     {
+        check_user_permissions('Manage Inquiry');
+
         //
     }
 
@@ -68,6 +70,8 @@ class InquiryController extends Controller
      */
     public function show(string $id)
     {
+        check_user_permissions('Manage Inquiry');
+
         //
     }
 
@@ -76,6 +80,8 @@ class InquiryController extends Controller
      */
     public function edit(string $id)
     {
+        check_user_permissions('Manage Inquiry');
+
         //
     }
 

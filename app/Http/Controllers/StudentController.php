@@ -13,6 +13,8 @@ class StudentController extends Controller
      */
     public function index()
     {
+        check_user_permissions('Manage Students');
+
         $students = Student::with('subjects')->get();
         return view('modules.students',[
             'students' => $students,
@@ -24,6 +26,8 @@ class StudentController extends Controller
      */
     public function create()
     {
+        check_user_permissions('Manage Students');
+
         $subjects = Subject::all();
         return view('modules.student_register',[
             'subjects' => $subjects,
@@ -69,6 +73,8 @@ class StudentController extends Controller
      */
     public function show($id)
     {
+        check_user_permissions('Manage Students');
+
         $subjects = Subject::all();
         $students = Student::findorFail($id);
         return view('modules.student_view',[
@@ -82,6 +88,8 @@ class StudentController extends Controller
      */
     public function edit(string $id)
     {
+        check_user_permissions('Manage Students');
+
         $subjects = Subject::all();
         $student = Student::findorFail($id);
 

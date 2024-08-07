@@ -11,6 +11,8 @@ class FeeController extends Controller
 {
     public function index()
     {
+        check_user_permissions('Manage Fee');
+
         $invoices = Invoice::with('student')->get();
         // dd($invoices);
         return view('fee.fee',[
@@ -23,6 +25,8 @@ class FeeController extends Controller
      */
     public function create()
     {
+        check_user_permissions('Manage Fee');
+
         $students = Student::where('status', 1)->get();
         return view('fee.fee_create',[
             'students' => $students,
@@ -46,6 +50,8 @@ class FeeController extends Controller
 
     public function generateInvoice()
     {
+        check_user_permissions('Manage Fee');
+
         $students = Student::all();
         return view('fee.generate_invoice',[
             'students' => $students

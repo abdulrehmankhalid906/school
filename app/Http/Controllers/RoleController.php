@@ -24,6 +24,7 @@ class RoleController extends Controller
      */
     public function create()
     {
+        check_user_permissions('Manage Roles');
         return view('roles.add_new');
     }
 
@@ -48,6 +49,7 @@ class RoleController extends Controller
      */
     public function show(string $id)
     {
+        check_user_permissions('Manage Roles');
         //
     }
 
@@ -56,6 +58,7 @@ class RoleController extends Controller
      */
     public function edit(string $id)
     {
+        check_user_permissions('Manage Roles');
         $roles = Role::findorFail($id);
         return view('roles.edit_role',[
             'roles' => $roles
@@ -85,6 +88,7 @@ class RoleController extends Controller
      */
     public function destroy(string $id)
     {
+        check_user_permissions('Manage Roles');
         $role = Role::findorFail($id);
 
         $role->delete();
@@ -95,6 +99,7 @@ class RoleController extends Controller
 
     public function AssignPermissionsToRole(Request $request, $id)
     {
+        check_user_permissions('Manage Roles');
         $role = Role::find($id);
         $permissions = Permission::all();
         $rolePermissions = $role->permissions->pluck('name')->toArray(); 
