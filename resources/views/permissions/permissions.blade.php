@@ -35,11 +35,11 @@
                                         <td>{{ $permission->name }}</td>
                                         <td>{{ $permission->created_at }}</td>
                                         <td>
-                                            <a href="{{ route('permissions.edit', $permission->id) }}" class="btn btn-info btn-sm"><i class="fas fa-edit"></i></a>
+                                            <a href="{{ route('permissions.edit', $permission->id) }}" class="btn btn-info btn-sm"><i class="bi bi-eyedropper"></i></a>
                                             <form action="{{ route('permissions.destroy', $permission->id) }}" method="post" style="display: inline;">
                                                 @csrf
                                                 @method('DELETE')
-                                                <button class="btn btn-danger btn-sm fa-solid fas fa-trash-alt"></button>
+                                                <button class="btn btn-danger btn-sm bi bi-trash"></button>
                                             </form>
                                         </td>
                                     </tr>

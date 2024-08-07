@@ -37,7 +37,7 @@
   <script src="{{ asset('admin/assets/js/main.js') }}"></script>
 
   {{-- To integrate Twak.io (just open web and create this script and add it here) --}}
-    <script type="text/javascript">
+    {{-- <script type="text/javascript">
         var Tawk_API=Tawk_API||{}, Tawk_LoadStart=new Date();
         (function(){
         var s1=document.createElement("script"),s0=document.getElementsByTagName("script")[0];
@@ -47,7 +47,7 @@
         s1.setAttribute('crossorigin','*');
         s0.parentNode.insertBefore(s1,s0);
         })();
-    </script>
+    </script> --}}
 
 </body>
 </html>

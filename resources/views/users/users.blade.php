@@ -4,7 +4,7 @@
     <div class="container-fluid">
         <div class="row mb-2">
             <div class="col-sm-6">
-                <h4 class="m-0">Role Listing</h4>
+                <h4 class="m-0">User Listing</h4>
             </div>
         </div>
     </div>
@@ -16,34 +16,37 @@
             <div class="col-12">
                 <div class="card">
                     <div class="card-header">
-                        <a href="{{ route('roles.create') }}" class="btn btn-primary btn-sm">Add Role</a>
+                        <a href="{{ route('users.create') }}" class="btn btn-primary btn-sm">Create User</a>
                     </div>
                     <div class="card-body">
                         <table id="example1" class="table table-bordered table-hover">
                             <thead>
                                 <tr>
                                     <th>#</th>
-                                    <th>Title</th>
+                                    <th>Name</th>
+                                    <th>Email</th>
+                                    <th>Role</th>
                                     <th>Created At</th>
                                     <th>Action</th>
-                                    <th>Operation</th>
                                 </tr>
                             </thead>
                             <tbody>
-                                @foreach ($roles as $role)
+                                @foreach ($users as $user)
                                     <tr>
-                                        <td>{{ $role->id }}</td>
-                                        <td>{{ $role->name }}</td>
-                                        <td>{{ $role->created_at }}</td>
+                                        <td>{{ $user->id }}</td>
+                                        <td>{{ $user->name }}</td>
+                                        <td>{{ $user->email }} </td>
+                                        <td>  </td>
+                                        <td>{{ $user->created_at }}</td>
                                         <td>
-                                            <a href="{{ route('roles.edit', $role->id) }}" class="btn btn-info btn-sm"><i class="bi bi-eyedropper"></i></a>
-                                            <form action="{{ route('roles.destroy', $role->id) }}" method="post" style="display: inline;">
+                                            <a href="{{ route('users.show', $user->id) }}" class="btn btn-primary btn-sm"><i class="bi bi-eye"></i></a>
+                                            <a href="{{ route('users.edit', $user->id) }}" class="btn btn-info btn-sm"><i class="bi bi-eyedropper"></i></a>
+                                            <form action="{{ route('users.destroy', $user->id) }}" method="POST" style="display: inline;">
                                                 @csrf
                                                 @method('DELETE')
                                                 <button class="btn btn-danger btn-sm bi bi-trash"></button>
                                             </form>
                                         </td>
-                                        <td><a href="{{ route('assign-permissions', $role->id) }}" class="btn btn-info btn-sm"><i class="fa fa-users"></i>Assign Permissions</a></td>
                                     </tr>
                                 @endforeach
                             </tbody>

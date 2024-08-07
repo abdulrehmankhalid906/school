@@ -1,14 +1,15 @@
 <?php
 
+use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\FeeController;
-use App\Http\Controllers\InquiryController;
-use App\Http\Controllers\PermissionController;
-use App\Http\Controllers\ProfileController;
+use Spatie\Activitylog\Models\Activity;
 use App\Http\Controllers\RoleController;
+use App\Http\Controllers\UserController;
+use App\Http\Controllers\InquiryController;
+use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\StudentController;
 use App\Http\Controllers\SubjectController;
-use Illuminate\Support\Facades\Route;
-use Spatie\Activitylog\Models\Activity;
+use App\Http\Controllers\PermissionController;
 
 /*
 |--------------------------------------------------------------------------
@@ -59,6 +60,7 @@ Route::put('/assign-permissions/{id}', [RoleController::class,'StoreAssignPermis
 //Resource Routes
 Route::resource('/students', StudentController::class);
 Route::resource('/subjects', SubjectController::class);
+Route::resource('/users', UserController::class);
 Route::resource('/roles', RoleController::class);
 Route::resource('/permissions', PermissionController::class);
 Route::resource('/inquires', InquiryController::class);
