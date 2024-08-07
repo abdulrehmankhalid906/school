@@ -115,7 +115,13 @@
             $.ajax([
                 url: "{{ route('generate-invoice-pdf') }}",
                 type: "GET",
-
+                data: {
+                    student_record: student_data
+                },
+                success:function(data)
+                {
+                    console.log(data);
+                },
             ])
         })
 
